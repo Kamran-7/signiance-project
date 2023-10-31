@@ -1,2 +1,2 @@
 # signiance-project
-Assignment AWS
+Assignment AWS - Terraform
