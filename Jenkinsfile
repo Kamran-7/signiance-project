@@ -45,8 +45,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // sh "docker stop python-app"
-                // sh "docker rm python-app"
+                sh "docker stop python-app"
+                sh "docker rm python-app"
                 sh "docker run --name python-app -d -p 5000:80 ghcr.io/$IMAGE_NAME:$env.IMAGE_VERSION"
             }
         }  
