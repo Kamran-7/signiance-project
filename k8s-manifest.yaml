@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+    spec:
+      imagePullSecrets:
+        - name: github-registry
+      containers:
+      - name: python-app
+        image: ghcr.io/devops-eb/myapp:v1.0
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-app
+spec:
+  selector:
+    app: python-app
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    nodePort: 32679
+  type: NodePort
